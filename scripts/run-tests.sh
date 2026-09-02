@@ -49,6 +49,26 @@ run_check() {
   rm -f "$logfile"
 }
 
+# Informational-only variant (e.g. tfsec): always shown as ℹ️, never PASS/FAIL.
+# Whether an open port or a given finding is a real problem depends on which
+# week/lab this is (e.g. a public web server intentionally opens port 80) --
+# that judgment call belongs to whoever grades this, not to this script.
+run_info() {
+  local label="$1"; shift
+  local logfile
+  logfile="$(mktemp)"
+  "$@" > "$logfile" 2>&1
+  local rc=$?
+  echo "- ℹ️ **FINDINGS** ($label, exit $rc -- review, does not auto-fail)" >> "$OUT"
+  echo '  <details><summary>output</summary>' >> "$OUT"
+  echo '' >> "$OUT"
+  echo '  ```' >> "$OUT"
+  sed 's/^/  /' "$logfile" | tail -60 >> "$OUT"
+  echo '  ```' >> "$OUT"
+  echo '  </details>' >> "$OUT"
+  rm -f "$logfile"
+}
+
 for dir in $DELIVERABLE_DIRS; do
   [ -d "$dir" ] || continue
 
@@ -61,19 +81,36 @@ for dir in $DELIVERABLE_DIRS; do
   fi
 
   echo "## $dir" >> "$OUT"
+  matched_anything=0
+
+  # --- Shell scripts: cheap syntax-only sanity check, applies broadly ---
+  sh_files=$(find "$dir" -iname '*.sh' 2>/dev/null)
+  for sf in $sh_files; do
+    matched_anything=1
+    run_check "bash -n syntax check ($sf)" bash -n "$sf"
+  done
 
   # --- Terraform ---
   tf_dirs=$(find "$dir" -name '*.tf' -exec dirname {} \; 2>/dev/null | sort -u)
   for tfd in $tf_dirs; do
+    matched_anything=1
     run_check "terraform validate ($tfd)" bash -c "cd '$tfd' && terraform init -backend=false -input=false && terraform validate"
     if command -v tfsec >/dev/null 2>&1; then
-      run_check "tfsec scan ($tfd), no HIGH/CRITICAL findings" bash -c "tfsec '$tfd' --minimum-severity HIGH"
+      if [ "$dir" = "lab7" ]; then
+        # lab7 = Week 12, Security & Policy-as-Code: this is the one folder
+        # where "tfsec finds nothing HIGH/CRITICAL" is the actual point of
+        # the exercise, so it's a real pass/fail gate here, not just FYI.
+        run_check "tfsec scan ($tfd), no HIGH/CRITICAL findings (required for this lab)" bash -c "tfsec '$tfd' --minimum-severity HIGH"
+      else
+        run_info "tfsec scan ($tfd)" tfsec "$tfd"
+      fi
     fi
   done
 
   # --- Docker ---
   dockerfiles=$(find "$dir" -iname 'Dockerfile' 2>/dev/null)
   for df in $dockerfiles; do
+    matched_anything=1
     ddir=$(dirname "$df")
     run_check "docker build ($df)" docker build -q -f "$df" "$ddir"
   done
@@ -83,6 +120,7 @@ for dir in $DELIVERABLE_DIRS; do
   for ad in $ansible_dirs; do
     playbooks=$(find "$ad" -maxdepth 2 -iname '*.yml' -o -iname '*.yaml' 2>/dev/null)
     for pb in $playbooks; do
+      matched_anything=1
       run_check "ansible-playbook --syntax-check ($pb)" ansible-playbook --syntax-check "$pb"
     done
   done
@@ -92,6 +130,7 @@ for dir in $DELIVERABLE_DIRS; do
   for kd in $k8s_dirs; do
     manifests=$(find "$kd" -iname '*.yaml' -o -iname '*.yml' 2>/dev/null)
     for m in $manifests; do
+      matched_anything=1
       run_check "kubectl apply --dry-run=client ($m)" kubectl apply --dry-run=client -f "$m"
     done
   done
@@ -99,8 +138,15 @@ for dir in $DELIVERABLE_DIRS; do
   # --- Packer ---
   packer_files=$(find "$dir" -iname '*.pkr.hcl' 2>/dev/null)
   for pf in $packer_files; do
+    matched_anything=1
     run_check "packer validate ($pf)" packer validate "$pf"
   done
+
+  if [ "$matched_anything" -eq 0 ]; then
+    file_list=$(find "$dir" -type f ! -iname 'README.md' | sed 's/^/    - /')
+    echo "- 📄 **FILES PRESENT, NO AUTOMATED CHECK FOR THIS CONTENT TYPE** -- needs manual/Claude-session review:" >> "$OUT"
+    echo "$file_list" >> "$OUT"
+  fi
 
   echo >> "$OUT"
 done
