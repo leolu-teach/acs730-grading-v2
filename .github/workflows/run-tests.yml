@@ -1,0 +1,109 @@
+name: Run Tests
+
+# No AI/LLM involvement here on purpose. This workflow only runs deterministic,
+# offline-safe technical checks (terraform validate, docker build, ansible
+# syntax check, kubectl dry-run, tfsec) per submitted deliverable folder, and
+# writes a plain PASS/FAIL results file to grading/results/ on `main`.
+# Grading itself (judgment, partial credit, code quality) is done separately
+# by a human or a Claude Code session reading these results plus the actual
+# code -- never by this pipeline.
+
+on:
+  workflow_run:
+    workflows: ["Pull Student Submissions"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'submissions/<username> branch to test (leave blank to test every submissions/* branch)'
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  list-branches:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    outputs:
+      branches: ${{ steps.list.outputs.branches }}
+    steps:
+      - id: list
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SINGLE_BRANCH: ${{ github.event.inputs.branch }}
+        run: |
+          if [ -n "$SINGLE_BRANCH" ]; then
+            echo "branches=[\"$SINGLE_BRANCH\"]" >> "$GITHUB_OUTPUT"
+          else
+            branches=$(gh api "repos/${{ github.repository }}/branches" --paginate -q '.[].name' \
+              | grep '^submissions/' \
+              | jq -R -s -c 'split("\n") | map(select(length > 0))')
+            echo "branches=${branches:-[]}" >> "$GITHUB_OUTPUT"
+          fi
+
+  test:
+    needs: list-branches
+    if: ${{ needs.list-branches.outputs.branches != '[]' }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        branch: ${{ fromJson(needs.list-branches.outputs.branches) }}
+    steps:
+      # Two separate checkouts: `tools/` has our own scripts (from main),
+      # `student/` has the submission we're testing. Keeping them apart means
+      # the student's content can never overwrite our test script.
+      - uses: actions/checkout@v4
+        with:
+          path: tools
+
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.branch }}
+          path: student
+          fetch-depth: 0
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.8"
+
+      - name: Install tfsec
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
+
+      - name: Install Ansible
+        run: pip install --quiet ansible
+
+      # Docker and kubectl are already present on the standard ubuntu-latest runner.
+
+      - name: Compute a safe filename slug for this branch
+        id: slug
+        run: echo "slug=$(echo '${{ matrix.branch }}' | tr '/' '-')" >> "$GITHUB_OUTPUT"
+
+      - name: Run deterministic checks
+        run: |
+          chmod +x tools/scripts/run-tests.sh
+          tools/scripts/run-tests.sh \
+            "${{ matrix.branch }}" \
+            "tools/grading/results/${{ steps.slug.outputs.slug }}.md" \
+            "student"
+
+      - name: Commit results to main
+        working-directory: tools
+        run: |
+          git config user.name "acs730-grading-bot"
+          git config user.email "actions@github.com"
+          git add "grading/results/${{ steps.slug.outputs.slug }}.md"
+          git diff --cached --quiet && exit 0
+          git commit -m "Test results for ${{ matrix.branch }} [skip pull]"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin main && break
+            sleep $((i * 3))
+          done
+
+      - name: Upload results as an artifact too
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ steps.slug.outputs.slug }}
+          path: tools/grading/results/${{ steps.slug.outputs.slug }}.md
