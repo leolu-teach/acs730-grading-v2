@@ -10,7 +10,9 @@ Each folder below corresponds to one deliverable. Instructions for each one will
 - `assignment1/` — Assignment 1
 - `assignment2/` — Assignment 2
 - `final-project/` — Final Project
+- `midterm-practice/` and `final-practice/` — the hands-on component of the Midterm and Final exams. These stay empty until the exam window opens; do not put anything here early.
+- `scripts/bootstrap-github-oidc.sh` — shared helper you'll use starting Week 3, and again any time your AWS Academy lab resets
 
 ## What to Submit
 
-Follow the normal Git workflow you'll learn in Week 1: commit your work to your own repository as you go. Submission instructions (what URL/branch/tag to provide) will be given with each assignment.
+Follow the normal Git workflow you'll learn in Week 1: commit your work to your own repository as you go. There is nothing to upload to Blackboard separately — every deliverable is graded directly from this repository. Do not delete or rename any of the folders above; the grading pipeline expects them at these exact paths.
