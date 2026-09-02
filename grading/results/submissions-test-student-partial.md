@@ -1,6 +1,6 @@
 # Test Results: submissions/test-student-partial
 
-_Generated 2026-09-02T02:51:56Z by run-tests.sh. This is a mechanical PASS/FAIL report, not a grade._
+_Generated 2026-09-02T10:37:20Z by run-tests.sh. This is a mechanical PASS/FAIL report, not a grade._
 
 ## lab1
 - ✅ **PASS** -- bash -n syntax check (lab1/scripts/create-instance.sh)
@@ -83,11 +83,11 @@ _Generated 2026-09-02T02:51:56Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 13.496µs
-  [0m[0m  [2mparsing             [0m 268.716µs
-  [0m[0m  [2madaptation          [0m 78.137µs
-  [0m[0m  [2mchecks              [0m 3.153875ms
-  [0m[0m  [2mtotal               [0m 3.514224ms
+  [0m[0m  [2mdisk i/o            [0m 12.471µs
+  [0m[0m  [2mparsing             [0m 234.255µs
+  [0m[0m  [2madaptation          [0m 88.751µs
+  [0m[0m  [2mchecks              [0m 9.442016ms
+  [0m[0m  [2mtotal               [0m 9.777493ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -154,11 +154,11 @@ _Generated 2026-09-02T02:51:56Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 13.345µs
-  [0m[0m  [2mparsing             [0m 218.821µs
-  [0m[0m  [2madaptation          [0m 106.801µs
-  [0m[0m  [2mchecks              [0m 3.11031ms
-  [0m[0m  [2mtotal               [0m 3.449277ms
+  [0m[0m  [2mdisk i/o            [0m 12.027µs
+  [0m[0m  [2mparsing             [0m 275.798µs
+  [0m[0m  [2madaptation          [0m 101.316µs
+  [0m[0m  [2mchecks              [0m 2.806804ms
+  [0m[0m  [2mtotal               [0m 3.195945ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -208,7 +208,7 @@ _Generated 2026-09-02T02:51:56Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m[3mResult #2[0m [0m[97mLOW[39m[0m [1mSecurity group rule does not have a description.[0m [2m[0m
   [0m[0m[90m────────────────────────────────────────────────────────────────────────────────
-  [0m[0m  [3mmain.tf[2m[3m:19-24
+  [0m[0m  [3mmain.tf[3m[2m:19-24
   [0m[0m[90m────────────────────────────────────────────────────────────────────────────────[39m
   [0m[0m[90m   15  [0m[0m  [38;5;33mresource[0m [38;5;37m"aws_security_group"[0m [38;5;37m"dev_web"[0m {[0m
   [0m[90m   16  [0m[0m    [38;5;245mname[0m        = [38;5;37m"acs730-assignment1-dev-web"[0m
@@ -234,11 +234,11 @@ _Generated 2026-09-02T02:51:56Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 13.686µs
-  [0m[0m  [2mparsing             [0m 144.371µs
-  [0m[0m  [2madaptation          [0m 78.568µs
-  [0m[0m  [2mchecks              [0m 9.540306ms
-  [0m[0m  [2mtotal               [0m 9.776931ms
+  [0m[0m  [2mdisk i/o            [0m 11.999µs
+  [0m[0m  [2mparsing             [0m 218.886µs
+  [0m[0m  [2madaptation          [0m 90.411µs
+  [0m[0m  [2mchecks              [0m 2.9777ms
+  [0m[0m  [2mtotal               [0m 3.298996ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -312,11 +312,11 @@ _Generated 2026-09-02T02:51:56Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 13.866µs
-  [0m[0m  [2mparsing             [0m 147.908µs
-  [0m[0m  [2madaptation          [0m 77.255µs
-  [0m[0m  [2mchecks              [0m 9.849668ms
-  [0m[0m  [2mtotal               [0m 10.088697ms
+  [0m[0m  [2mdisk i/o            [0m 12.53µs
+  [0m[0m  [2mparsing             [0m 154.395µs
+  [0m[0m  [2madaptation          [0m 88.485µs
+  [0m[0m  [2mchecks              [0m 2.910916ms
+  [0m[0m  [2mtotal               [0m 3.166326ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
