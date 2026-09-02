@@ -4,9 +4,6 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths:
-      - '.github/workflows/pull-submissions.yml'
-      - 'roster.csv'
   schedule:
     - cron: '0 6 * * *'  # daily at 06:00 UTC — adjust to taste
 

@@ -1,31 +1,59 @@
 name: Grade Submission
 
 on:
-  push:
-    branches:
-      - 'submissions/**'
+  workflow_run:
+    workflows: ["Pull Student Submissions"]
+    types: [completed]
   workflow_dispatch:
     inputs:
       branch:
-        description: 'submissions/<username> branch to grade'
-        required: true
+        description: 'submissions/<username> branch to grade (leave blank to grade every submissions/* branch)'
+        required: false
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
-  grade:
+  list-branches:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+    outputs:
+      branches: ${{ steps.list.outputs.branches }}
+    steps:
+      - id: list
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SINGLE_BRANCH: ${{ github.event.inputs.branch }}
+        run: |
+          if [ -n "$SINGLE_BRANCH" ]; then
+            echo "branches=[\"$SINGLE_BRANCH\"]" >> "$GITHUB_OUTPUT"
+          else
+            branches=$(gh api "repos/${{ github.repository }}/branches" --paginate -q '.[].name' \
+              | grep '^submissions/' \
+              | jq -R -s -c 'split("\n") | map(select(length > 0))')
+            echo "branches=${branches:-[]}" >> "$GITHUB_OUTPUT"
+          fi
+
+  grade:
+    needs: list-branches
+    if: ${{ needs.list-branches.outputs.branches != '[]' }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        branch: ${{ fromJson(needs.list-branches.outputs.branches) }}
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.branch || github.ref }}
+          ref: ${{ matrix.branch }}
 
-      - name: Identify which folder(s) changed
+      - name: Identify which folder to grade, and a safe artifact-name slug
         id: changed
         run: |
-          echo "This example grades lab1/ — copy this job per lab/assignment folder, or loop over folders."
+          echo "This example grades lab1/ — extend this to loop over every graded folder that exists."
           echo "folder=lab1" >> "$GITHUB_OUTPUT"
+          echo "slug=$(echo '${{ matrix.branch }}' | tr '/' '-')" >> "$GITHUB_OUTPUT"
 
       # Requires an ANTHROPIC_API_KEY secret on this repo (this repo is
       # instructor-only and private — never add this secret to a student repo).
@@ -35,9 +63,10 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
             You are grading a student's submission for ACS730 ${{ steps.changed.outputs.folder }}.
+            The branch name is ${{ matrix.branch }} (format: submissions/<github-username>).
             Review the contents of the ${{ steps.changed.outputs.folder }}/ directory in this
             checked-out branch against the rubric in grading/rubrics/${{ steps.changed.outputs.folder }}.md.
-            Write a grading report to grading/results/${{ github.ref_name }}-${{ steps.changed.outputs.folder }}.md
+            Write a grading report to grading/results/${{ steps.changed.outputs.folder }}.md
             with: a score out of the rubric's total points, what was done well, what was missing or
             incorrect, and specific file/line references where possible. Do not modify the student's
             submitted files — only write the report file.
@@ -45,5 +74,5 @@ jobs:
       - name: Upload grading report as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: grading-report-${{ github.ref_name }}
+          name: grading-report-${{ steps.changed.outputs.slug }}
           path: grading/results/
