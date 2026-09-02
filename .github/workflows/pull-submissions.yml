@@ -1,0 +1,56 @@
+name: Pull Student Submissions
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'  # daily at 06:00 UTC — adjust to taste
+
+permissions:
+  contents: write
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git identity for the bot commits
+        run: |
+          git config user.name "acs730-grading-bot"
+          git config user.email "actions@github.com"
+
+      - name: Pull each student repository into its own branch
+        run: |
+          set -e
+          tail -n +2 roster.csv | while IFS=, read -r username repo_url; do
+            username="$(echo "$username" | xargs)"
+            repo_url="$(echo "$repo_url" | xargs)"
+            [ -z "$username" ] && continue
+            case "$username" in \#*) continue ;; esac
+
+            echo "=== Pulling $username from $repo_url ==="
+            branch="submissions/$username"
+
+            default_branch=""
+            if git ls-remote --exit-code "$repo_url" main >/dev/null 2>&1; then
+              default_branch=main
+            elif git ls-remote --exit-code "$repo_url" master >/dev/null 2>&1; then
+              default_branch=master
+            fi
+
+            if [ -z "$default_branch" ]; then
+              echo "WARNING: could not find a main or master branch for $username at $repo_url — skipping"
+              continue
+            fi
+
+            git fetch "$repo_url" "$default_branch" --force
+            git push origin "FETCH_HEAD:refs/heads/$branch" --force
+            echo "Updated branch $branch from $username's $default_branch"
+          done
+
+      - name: Summary
+        run: |
+          echo "## Pull summary" >> "$GITHUB_STEP_SUMMARY"
+          git branch -r | grep 'origin/submissions/' >> "$GITHUB_STEP_SUMMARY" || echo "No submission branches found." >> "$GITHUB_STEP_SUMMARY"

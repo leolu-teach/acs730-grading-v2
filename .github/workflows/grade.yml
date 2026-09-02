@@ -1,0 +1,49 @@
+name: Grade Submission
+
+on:
+  push:
+    branches:
+      - 'submissions/**'
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'submissions/<username> branch to grade'
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  grade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch || github.ref }}
+
+      - name: Identify which folder(s) changed
+        id: changed
+        run: |
+          echo "This example grades lab1/ — copy this job per lab/assignment folder, or loop over folders."
+          echo "folder=lab1" >> "$GITHUB_OUTPUT"
+
+      # Requires an ANTHROPIC_API_KEY secret on this repo (this repo is
+      # instructor-only and private — never add this secret to a student repo).
+      - name: Run Claude Code review against the rubric
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            You are grading a student's submission for ACS730 ${{ steps.changed.outputs.folder }}.
+            Review the contents of the ${{ steps.changed.outputs.folder }}/ directory in this
+            checked-out branch against the rubric in grading/rubrics/${{ steps.changed.outputs.folder }}.md.
+            Write a grading report to grading/results/${{ github.ref_name }}-${{ steps.changed.outputs.folder }}.md
+            with: a score out of the rubric's total points, what was done well, what was missing or
+            incorrect, and specific file/line references where possible. Do not modify the student's
+            submitted files — only write the report file.
+
+      - name: Upload grading report as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: grading-report-${{ github.ref_name }}
+          path: grading/results/
