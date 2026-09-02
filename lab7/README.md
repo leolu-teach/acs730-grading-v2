@@ -1,5 +1,7 @@
-# Lab 7
+# Lab 7 - Security and Policy-as-Code
 
-Instructions for this section will be provided in class and on Blackboard when we reach it.
+Step 1 done: reproduced an insecure S3 bucket (no encryption, public access block disabled) so the
+required `tfsec` check has a real HIGH/CRITICAL finding to catch. Confirmed the pipeline blocks this.
 
-Put your work for Lab 7 in this folder.
+TODO (not done yet): fix the bucket (enable encryption, re-enable the public access block) and
+replace `PowerUserAccess` on the deploy role with a scoped-down policy.

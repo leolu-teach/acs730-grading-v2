@@ -1,0 +1,6 @@
+---
+- name: Configure web servers via dynamic inventory
+  hosts: role_web
+  become: true
+  roles:
+    - webserver

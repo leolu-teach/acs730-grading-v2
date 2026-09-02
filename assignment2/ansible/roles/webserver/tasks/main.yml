@@ -1,0 +1,16 @@
+---
+- name: Install httpd
+  ansible.builtin.dnf:
+    name: httpd
+    state: present
+
+- name: Deploy index page from template
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+
+- name: Ensure httpd is enabled and running
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: true

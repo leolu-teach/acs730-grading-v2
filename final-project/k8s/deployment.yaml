@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: acs730-final-frontend
+  labels:
+    app: acs730-final-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: acs730-final-frontend
+  template:
+    metadata:
+      labels:
+        app: acs730-final-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: ghcr.io/leolu-teach/acs730-lab4:latest
+          ports:
+            - containerPort: 5000

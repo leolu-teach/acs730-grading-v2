@@ -1,5 +1,4 @@
-# Lab 8
+# Lab 8 - Kubernetes Fundamentals
 
-Instructions for this section will be provided in class and on Blackboard when we reach it.
-
-Put your work for Lab 8 in this folder.
+- `k8s/deployment.yaml` / `k8s/service.yaml` - working Deployment + ClusterIP Service for the Lab 4 image, deployed and confirmed reachable on a local `kind` cluster.
+- `k8s/hpa.yaml` - in progress: trying to add autoscaling, getting an error I have not tracked down yet (see Actions run).
