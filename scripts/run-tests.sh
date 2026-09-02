@@ -118,20 +118,40 @@ for dir in $DELIVERABLE_DIRS; do
   # --- Ansible ---
   ansible_dirs=$(find "$dir" -type d -iname 'ansible' 2>/dev/null)
   for ad in $ansible_dirs; do
-    playbooks=$(find "$ad" -maxdepth 2 -iname '*.yml' -o -iname '*.yaml' 2>/dev/null)
+    # Real playbooks -- everything except inventory/ (dynamic inventory config
+    # files, e.g. an amazon.aws.aws_ec2 plugin YAML, are not plays and will
+    # always "fail" ansible-playbook --syntax-check even when they're fine).
+    playbooks=$(find "$ad" -maxdepth 2 \( -iname '*.yml' -o -iname '*.yaml' \) ! -path '*/inventory/*' 2>/dev/null)
     for pb in $playbooks; do
       matched_anything=1
       run_check "ansible-playbook --syntax-check ($pb)" ansible-playbook --syntax-check "$pb"
     done
+
+    # Inventory config files: just confirm they're valid YAML. Actually
+    # resolving them (ansible-inventory --graph) would call out to AWS with
+    # credentials this pipeline intentionally never has -- out of scope for a
+    # deterministic, offline-safe check.
+    inv_dirs=$(find "$ad" -type d -iname 'inventory' 2>/dev/null)
+    for id in $inv_dirs; do
+      inv_files=$(find "$id" -maxdepth 1 \( -iname '*.yml' -o -iname '*.yaml' \) 2>/dev/null)
+      for inv in $inv_files; do
+        matched_anything=1
+        run_check "YAML syntax check (inventory: $inv)" python3 -c "import yaml,sys; yaml.safe_load(open(sys.argv[1]))" "$inv"
+      done
+    done
   done
 
-  # --- Kubernetes manifests (client-side only, no live cluster needed) ---
+  # --- Kubernetes manifests (schema validation, no live cluster needed) ---
+  # `kubectl apply --dry-run=client` still needs a reachable API server for
+  # REST-mapping discovery, which a bare CI runner doesn't have -- it would
+  # fail every manifest with "connection refused", not a real finding. Use
+  # kubeconform instead: a static OpenAPI schema validator, genuinely offline.
   k8s_dirs=$(find "$dir" -type d -iname 'k8s' 2>/dev/null)
   for kd in $k8s_dirs; do
     manifests=$(find "$kd" -iname '*.yaml' -o -iname '*.yml' 2>/dev/null)
     for m in $manifests; do
       matched_anything=1
-      run_check "kubectl apply --dry-run=client ($m)" kubectl apply --dry-run=client -f "$m"
+      run_check "kubeconform schema validation ($m)" kubeconform -strict -summary "$m"
     done
   done
 
@@ -139,7 +159,11 @@ for dir in $DELIVERABLE_DIRS; do
   packer_files=$(find "$dir" -iname '*.pkr.hcl' 2>/dev/null)
   for pf in $packer_files; do
     matched_anything=1
-    run_check "packer validate ($pf)" packer validate "$pf"
+    # `packer init` fetches any required_plugins (e.g. the amazon-ebs builder)
+    # so validate can get past plugin resolution to the actual template.
+    # Best-effort: if init fails (no network, no required_plugins block),
+    # validate still runs and reports whatever real error applies.
+    run_check "packer validate ($pf)" bash -c "packer init '$pf' >/dev/null 2>&1; packer validate '$pf'"
   done
 
   if [ "$matched_anything" -eq 0 ]; then
