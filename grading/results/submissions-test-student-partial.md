@@ -1,10 +1,13 @@
 # Test Results: submissions/test-student-partial
 
-_Generated 2026-09-02T02:29:34Z by run-tests.sh. This is a mechanical PASS/FAIL report, not a grade._
+_Generated 2026-09-02T02:32:44Z by run-tests.sh. This is a mechanical PASS/FAIL report, not a grade._
 
 ## lab1
+- ✅ **PASS** -- bash -n syntax check (lab1/scripts/create-instance.sh)
+- ✅ **PASS** -- bash -n syntax check (lab1/scripts/create-security-group.sh)
 
 ## lab2
+- ✅ **PASS** -- bash -n syntax check (lab2/scripts/deploy-web.sh)
 
 ## lab3
 - ❌ **FAIL** -- terraform validate (lab3)
@@ -41,16 +44,10 @@ _Generated 2026-09-02T02:29:34Z by run-tests.sh. This is a mechanical PASS/FAIL 
   ::error::Terraform exited with code 1.
   ```
   </details>
-- ❌ **FAIL** -- tfsec scan (lab3), no HIGH/CRITICAL findings
+- ℹ️ **FINDINGS** (tfsec scan (lab3), exit 1 -- review, does not auto-fail)
   <details><summary>output</summary>
 
   ```
-  [0m[31m   32  [0m[0m [0m[0m [0m  [38;5;245minstance_type[0m = [38;5;33mvar[0m.instance_type[0m
-  [0m[31m   33  [0m[0m [0m[0m }[0m
-  [0m[90m────────────────────────────────────────────────────────────────────────────────[39m
-  [0m[0m  [2m        ID[0m[3m aws-ec2-enable-at-rest-encryption
-  [0m[0m  [2m    Impact[0m The block device could be compromised and read from
-  [0m[0m  [2mResolution[0m Turn on encryption for all block devices
   [0m[0m
     [2mMore Information[0m[0m[0m
     [2m-[0m [34mhttps://aquasecurity.github.io/tfsec/v1.28.14/checks/aws/ec2/enable-at-rest-encryption/[0m[0m
@@ -58,13 +55,39 @@ _Generated 2026-09-02T02:29:34Z by run-tests.sh. This is a mechanical PASS/FAIL 
   [90m────────────────────────────────────────────────────────────────────────────────[39m
   
   
+  [0m[0m[3mResult #4[0m [0m[97mLOW[39m[0m [1mSecurity group rule does not have a description.[0m [2m[0m
+  [0m[0m[90m────────────────────────────────────────────────────────────────────────────────
+  [0m[0m  [3mmain.tf[2m[3m:19-24
+  [0m[0m[90m────────────────────────────────────────────────────────────────────────────────[39m
+  [0m[0m[90m   15  [0m[0m  [38;5;33mresource[0m [38;5;37m"aws_security_group"[0m [38;5;37m"lab3_demo"[0m {[0m
+  [0m[90m   16  [0m[0m    [38;5;245mname[0m        = [38;5;37m"acs730-lab3-demo"[0m
+  [0m[90m   17  [0m[0m  [0m  [38;5;245mdescription[0m = [38;5;37m"Created by Terraform in Lab 3"[0m
+  [0m[90m   18  [0m[0m  [0m[0m
+  [0m[31m   19  [0m[0m[31m┌[39m[0m[0m   ingress {[0m
+  [0m[31m   20  [0m[0m[31m│[39m[0m[0m     [38;5;245mfrom_port[0m   = [38;5;37m22[0m
+  [0m[31m   21  [0m[0m[31m│[39m[0m[0m [0m    [38;5;245mto_port[0m     = [38;5;37m22[0m
+  [0m[31m   22  [0m[0m[31m│[39m[0m[0m [0m    [38;5;245mprotocol[0m    = [38;5;37m"tcp"[0m
+  [0m[31m   23  [0m[0m[31m└[39m[0m[0m [0m    [38;5;245mcidr_blocks[0m = [[38;5;37m"0.0.0.0/0"[0m][0m
+  [0m[90m   ..  [0m
+  [0m[90m────────────────────────────────────────────────────────────────────────────────[39m
+  [0m[0m  [2m        ID[0m[3m aws-ec2-add-description-to-security-group-rule
+  [0m[0m  [2m    Impact[0m Descriptions provide context for the firewall rule reasons
+  [0m[0m  [2mResolution[0m Add descriptions for all security groups rules
+  [0m[0m
+    [2mMore Information[0m[0m[0m
+    [2m-[0m [34mhttps://aquasecurity.github.io/tfsec/v1.28.14/checks/aws/ec2/add-description-to-security-group-rule/[0m[0m
+    [2m-[0m [34mhttps://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group[0m[0m
+    [2m-[0m [34mhttps://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule[0m[0m
+  [90m────────────────────────────────────────────────────────────────────────────────[39m
+  
+  
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 12.871µs
-  [0m[0m  [2mparsing             [0m 256.793µs
-  [0m[0m  [2madaptation          [0m 89.477µs
-  [0m[0m  [2mchecks              [0m 8.319482ms
-  [0m[0m  [2mtotal               [0m 8.678623ms
+  [0m[0m  [2mdisk i/o            [0m 17.837µs
+  [0m[0m  [2mparsing             [0m 211.649µs
+  [0m[0m  [2madaptation          [0m 98.167µs
+  [0m[0m  [2mchecks              [0m 2.55433ms
+  [0m[0m  [2mtotal               [0m 2.881983ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -75,14 +98,14 @@ _Generated 2026-09-02T02:29:34Z by run-tests.sh. This is a mechanical PASS/FAIL 
   [0m
   [0m  [1mresults[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mpassed              [0m 1
-  [0m[0m  [2mignored             [0m 2
+  [0m[0m  [2mpassed              [0m 2
+  [0m[0m  [2mignored             [0m 0
   [0m[0m  [2mcritical            [0m 1
   [0m[0m  [2mhigh                [0m 2
   [0m[0m  [2mmedium              [0m 0
-  [0m[0m  [2mlow                 [0m 0
+  [0m[0m  [2mlow                 [0m 1
   [0m
-  [0m  [31m[1m1 passed, 2 ignored, 3 potential problem(s) detected.
+  [0m  [31m[1m2 passed, 4 potential problem(s) detected.
   
   [0m  ```
   </details>
@@ -104,16 +127,10 @@ _Generated 2026-09-02T02:29:34Z by run-tests.sh. This is a mechanical PASS/FAIL 
 
 ## assignment1
 - ✅ **PASS** -- terraform validate (assignment1/terraform/dev)
-- ❌ **FAIL** -- tfsec scan (assignment1/terraform/dev), no HIGH/CRITICAL findings
+- ℹ️ **FINDINGS** (tfsec scan (assignment1/terraform/dev), exit 1 -- review, does not auto-fail)
   <details><summary>output</summary>
 
   ```
-  [0m[31m   23  [0m[0m[31m[[39m[0m[0m [0m    [38;5;245mcidr_blocks[0m = [[38;5;37m"0.0.0.0/0"[0m][0m
-  [0m[90m   ..  [0m
-  [0m[90m────────────────────────────────────────────────────────────────────────────────[39m
-  [0m[0m  [2m        ID[0m[3m aws-ec2-no-public-ingress-sgr
-  [0m[0m  [2m    Impact[0m Your port exposed to the internet
-  [0m[0m  [2mResolution[0m Set a more restrictive cidr range
   [0m[0m
     [2mMore Information[0m[0m[0m
     [2m-[0m [34mhttps://aquasecurity.github.io/tfsec/v1.28.14/checks/aws/ec2/no-public-ingress-sgr/[0m[0m
@@ -121,13 +138,39 @@ _Generated 2026-09-02T02:29:34Z by run-tests.sh. This is a mechanical PASS/FAIL 
   [90m────────────────────────────────────────────────────────────────────────────────[39m
   
   
+  [0m[0m[3mResult #2[0m [0m[97mLOW[39m[0m [1mSecurity group rule does not have a description.[0m [2m[0m
+  [0m[0m[90m────────────────────────────────────────────────────────────────────────────────
+  [0m[0m  [3mmain.tf[2m[3m:19-24
+  [0m[0m[90m────────────────────────────────────────────────────────────────────────────────[39m
+  [0m[0m[90m   15  [0m[0m  [38;5;33mresource[0m [38;5;37m"aws_security_group"[0m [38;5;37m"dev_web"[0m {[0m
+  [0m[90m   16  [0m[0m    [38;5;245mname[0m        = [38;5;37m"acs730-assignment1-dev-web"[0m
+  [0m[90m   17  [0m[0m  [0m  [38;5;245mdescription[0m = [38;5;37m"Dev web security group (assignment 1, not yet modularized)"[0m
+  [0m[90m   18  [0m[0m  [0m[0m
+  [0m[31m   19  [0m[0m[31m┌[39m[0m[0m   ingress {[0m
+  [0m[31m   20  [0m[0m[31m│[39m[0m[0m     [38;5;245mfrom_port[0m   = [38;5;37m80[0m
+  [0m[31m   21  [0m[0m[31m│[39m[0m[0m [0m    [38;5;245mto_port[0m     = [38;5;37m80[0m
+  [0m[31m   22  [0m[0m[31m│[39m[0m[0m [0m    [38;5;245mprotocol[0m    = [38;5;37m"tcp"[0m
+  [0m[31m   23  [0m[0m[31m└[39m[0m[0m [0m    [38;5;245mcidr_blocks[0m = [[38;5;37m"0.0.0.0/0"[0m][0m
+  [0m[90m   ..  [0m
+  [0m[90m────────────────────────────────────────────────────────────────────────────────[39m
+  [0m[0m  [2m        ID[0m[3m aws-ec2-add-description-to-security-group-rule
+  [0m[0m  [2m    Impact[0m Descriptions provide context for the firewall rule reasons
+  [0m[0m  [2mResolution[0m Add descriptions for all security groups rules
+  [0m[0m
+    [2mMore Information[0m[0m[0m
+    [2m-[0m [34mhttps://aquasecurity.github.io/tfsec/v1.28.14/checks/aws/ec2/add-description-to-security-group-rule/[0m[0m
+    [2m-[0m [34mhttps://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group[0m[0m
+    [2m-[0m [34mhttps://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule[0m[0m
+  [90m────────────────────────────────────────────────────────────────────────────────[39m
+  
+  
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 11.796µs
-  [0m[0m  [2mparsing             [0m 148.939µs
-  [0m[0m  [2madaptation          [0m 91.985µs
-  [0m[0m  [2mchecks              [0m 2.69651ms
-  [0m[0m  [2mtotal               [0m 2.94923ms
+  [0m[0m  [2mdisk i/o            [0m 17.025µs
+  [0m[0m  [2mparsing             [0m 166.901µs
+  [0m[0m  [2madaptation          [0m 95.273µs
+  [0m[0m  [2mchecks              [0m 2.652577ms
+  [0m[0m  [2mtotal               [0m 2.931776ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -138,14 +181,14 @@ _Generated 2026-09-02T02:29:34Z by run-tests.sh. This is a mechanical PASS/FAIL 
   [0m
   [0m  [1mresults[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mpassed              [0m 0
-  [0m[0m  [2mignored             [0m 2
+  [0m[0m  [2mpassed              [0m 1
+  [0m[0m  [2mignored             [0m 0
   [0m[0m  [2mcritical            [0m 1
   [0m[0m  [2mhigh                [0m 0
   [0m[0m  [2mmedium              [0m 0
-  [0m[0m  [2mlow                 [0m 0
+  [0m[0m  [2mlow                 [0m 1
   [0m
-  [0m  [31m[1m2 ignored, 1 potential problem(s) detected.
+  [0m  [31m[1m1 passed, 2 potential problem(s) detected.
   
   [0m  ```
   </details>
