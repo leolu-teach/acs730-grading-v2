@@ -1,10 +1,10 @@
 # Test Results: submissions/test-student-partial
 
-_Generated 2026-09-03T10:40:12Z by run-tests.sh. This is a mechanical PASS/FAIL report, not a grade._
+_Generated 2026-09-04T10:34:37Z by run-tests.sh. This is a mechanical PASS/FAIL report, not a grade._
 
 ## lab1
-- ✅ **PASS** -- bash -n syntax check (lab1/scripts/create-instance.sh)
 - ✅ **PASS** -- bash -n syntax check (lab1/scripts/create-security-group.sh)
+- ✅ **PASS** -- bash -n syntax check (lab1/scripts/create-instance.sh)
 
 ## lab2
 - ✅ **PASS** -- bash -n syntax check (lab2/scripts/deploy-web.sh)
@@ -57,7 +57,7 @@ _Generated 2026-09-03T10:40:12Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m[3mResult #4[0m [0m[97mLOW[39m[0m [1mSecurity group rule does not have a description.[0m [2m[0m
   [0m[0m[90m────────────────────────────────────────────────────────────────────────────────
-  [0m[0m  [3mmain.tf[3m[2m:19-24
+  [0m[0m  [3mmain.tf[2m[3m:19-24
   [0m[0m[90m────────────────────────────────────────────────────────────────────────────────[39m
   [0m[0m[90m   15  [0m[0m  [38;5;33mresource[0m [38;5;37m"aws_security_group"[0m [38;5;37m"lab3_demo"[0m {[0m
   [0m[90m   16  [0m[0m    [38;5;245mname[0m        = [38;5;37m"acs730-lab3-demo"[0m
@@ -83,11 +83,11 @@ _Generated 2026-09-03T10:40:12Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 16.064µs
-  [0m[0m  [2mparsing             [0m 227.122µs
-  [0m[0m  [2madaptation          [0m 94.493µs
-  [0m[0m  [2mchecks              [0m 3.049769ms
-  [0m[0m  [2mtotal               [0m 3.387448ms
+  [0m[0m  [2mdisk i/o            [0m 13.976µs
+  [0m[0m  [2mparsing             [0m 202.41µs
+  [0m[0m  [2madaptation          [0m 78.467µs
+  [0m[0m  [2mchecks              [0m 3.10686ms
+  [0m[0m  [2mtotal               [0m 3.401713ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -154,11 +154,11 @@ _Generated 2026-09-03T10:40:12Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 18.929µs
-  [0m[0m  [2mparsing             [0m 226.021µs
-  [0m[0m  [2madaptation          [0m 98.208µs
-  [0m[0m  [2mchecks              [0m 5.717913ms
-  [0m[0m  [2mtotal               [0m 6.061071ms
+  [0m[0m  [2mdisk i/o            [0m 14.948µs
+  [0m[0m  [2mparsing             [0m 218.099µs
+  [0m[0m  [2madaptation          [0m 81.764µs
+  [0m[0m  [2mchecks              [0m 3.087084ms
+  [0m[0m  [2mtotal               [0m 3.401895ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -182,6 +182,7 @@ _Generated 2026-09-03T10:40:12Z by run-tests.sh. This is a mechanical PASS/FAIL 
   </details>
 
 ## lab8
+- ✅ **PASS** -- kubeconform schema validation (lab8/k8s/deployment.yaml)
 - ✅ **PASS** -- kubeconform schema validation (lab8/k8s/service.yaml)
 - ❌ **FAIL** -- kubeconform schema validation (lab8/k8s/hpa.yaml)
   <details><summary>output</summary>
@@ -191,7 +192,6 @@ _Generated 2026-09-03T10:40:12Z by run-tests.sh. This is a mechanical PASS/FAIL 
   Summary: 1 resource found in 1 file - Valid: 0, Invalid: 0, Errors: 1, Skipped: 0
   ```
   </details>
-- ✅ **PASS** -- kubeconform schema validation (lab8/k8s/deployment.yaml)
 
 ## assignment1
 - ✅ **PASS** -- terraform validate (assignment1/terraform/dev)
@@ -234,11 +234,11 @@ _Generated 2026-09-03T10:40:12Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 15.864µs
-  [0m[0m  [2mparsing             [0m 146.581µs
-  [0m[0m  [2madaptation          [0m 116.115µs
-  [0m[0m  [2mchecks              [0m 6.426222ms
-  [0m[0m  [2mtotal               [0m 6.704782ms
+  [0m[0m  [2mdisk i/o            [0m 13.335µs
+  [0m[0m  [2mparsing             [0m 140.995µs
+  [0m[0m  [2madaptation          [0m 75.461µs
+  [0m[0m  [2mchecks              [0m 3.039232ms
+  [0m[0m  [2mtotal               [0m 3.269023ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -286,7 +286,7 @@ _Generated 2026-09-03T10:40:12Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m[3mResult #2[0m [0m[97mLOW[39m[0m [1mSecurity group rule does not have a description.[0m [2m[0m
   [0m[0m[90m────────────────────────────────────────────────────────────────────────────────
-  [0m[0m  [3mmain.tf[2m[3m:19-24
+  [0m[0m  [3mmain.tf[3m[2m:19-24
   [0m[0m[90m────────────────────────────────────────────────────────────────────────────────[39m
   [0m[0m[90m   15  [0m[0m  [38;5;33mresource[0m [38;5;37m"aws_security_group"[0m [38;5;37m"final_project_dev"[0m {[0m
   [0m[90m   16  [0m[0m    [38;5;245mname[0m        = [38;5;37m"acs730-final-project-dev"[0m
@@ -312,11 +312,11 @@ _Generated 2026-09-03T10:40:12Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 16.064µs
-  [0m[0m  [2mparsing             [0m 182.685µs
-  [0m[0m  [2madaptation          [0m 131.198µs
-  [0m[0m  [2mchecks              [0m 2.613276ms
-  [0m[0m  [2mtotal               [0m 2.943223ms
+  [0m[0m  [2mdisk i/o            [0m 15.158µs
+  [0m[0m  [2mparsing             [0m 159.709µs
+  [0m[0m  [2madaptation          [0m 79.559µs
+  [0m[0m  [2mchecks              [0m 5.611438ms
+  [0m[0m  [2mtotal               [0m 5.865864ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -339,8 +339,8 @@ _Generated 2026-09-03T10:40:12Z by run-tests.sh. This is a mechanical PASS/FAIL 
   [0m  ```
   </details>
 - ✅ **PASS** -- ansible-playbook --syntax-check (final-project/ansible/playbook.yml)
-- ✅ **PASS** -- kubeconform schema validation (final-project/k8s/service.yaml)
 - ✅ **PASS** -- kubeconform schema validation (final-project/k8s/deployment.yaml)
+- ✅ **PASS** -- kubeconform schema validation (final-project/k8s/service.yaml)
 
 ## Repository-wide hygiene
 - ✅ **PASS** -- no `.tfstate`/`.pem`/`credentials` files found anywhere in git history
