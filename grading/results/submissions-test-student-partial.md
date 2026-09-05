@@ -1,6 +1,6 @@
 # Test Results: submissions/test-student-partial
 
-_Generated 2026-09-04T10:34:37Z by run-tests.sh. This is a mechanical PASS/FAIL report, not a grade._
+_Generated 2026-09-05T09:56:54Z by run-tests.sh. This is a mechanical PASS/FAIL report, not a grade._
 
 ## lab1
 - ✅ **PASS** -- bash -n syntax check (lab1/scripts/create-security-group.sh)
@@ -83,11 +83,11 @@ _Generated 2026-09-04T10:34:37Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 13.976µs
-  [0m[0m  [2mparsing             [0m 202.41µs
-  [0m[0m  [2madaptation          [0m 78.467µs
-  [0m[0m  [2mchecks              [0m 3.10686ms
-  [0m[0m  [2mtotal               [0m 3.401713ms
+  [0m[0m  [2mdisk i/o            [0m 15.299µs
+  [0m[0m  [2mparsing             [0m 208.079µs
+  [0m[0m  [2madaptation          [0m 89.717µs
+  [0m[0m  [2mchecks              [0m 3.165781ms
+  [0m[0m  [2mtotal               [0m 3.478876ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -154,11 +154,11 @@ _Generated 2026-09-04T10:34:37Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 14.948µs
-  [0m[0m  [2mparsing             [0m 218.099µs
-  [0m[0m  [2madaptation          [0m 81.764µs
-  [0m[0m  [2mchecks              [0m 3.087084ms
-  [0m[0m  [2mtotal               [0m 3.401895ms
+  [0m[0m  [2mdisk i/o            [0m 17.272µs
+  [0m[0m  [2mparsing             [0m 226.161µs
+  [0m[0m  [2madaptation          [0m 99.285µs
+  [0m[0m  [2mchecks              [0m 3.045524ms
+  [0m[0m  [2mtotal               [0m 3.388242ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -208,7 +208,7 @@ _Generated 2026-09-04T10:34:37Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m[3mResult #2[0m [0m[97mLOW[39m[0m [1mSecurity group rule does not have a description.[0m [2m[0m
   [0m[0m[90m────────────────────────────────────────────────────────────────────────────────
-  [0m[0m  [3mmain.tf[2m[3m:19-24
+  [0m[0m  [3mmain.tf[3m[2m:19-24
   [0m[0m[90m────────────────────────────────────────────────────────────────────────────────[39m
   [0m[0m[90m   15  [0m[0m  [38;5;33mresource[0m [38;5;37m"aws_security_group"[0m [38;5;37m"dev_web"[0m {[0m
   [0m[90m   16  [0m[0m    [38;5;245mname[0m        = [38;5;37m"acs730-assignment1-dev-web"[0m
@@ -234,11 +234,11 @@ _Generated 2026-09-04T10:34:37Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 13.335µs
-  [0m[0m  [2mparsing             [0m 140.995µs
-  [0m[0m  [2madaptation          [0m 75.461µs
-  [0m[0m  [2mchecks              [0m 3.039232ms
-  [0m[0m  [2mtotal               [0m 3.269023ms
+  [0m[0m  [2mdisk i/o            [0m 13.285µs
+  [0m[0m  [2mparsing             [0m 335.024µs
+  [0m[0m  [2madaptation          [0m 158.135µs
+  [0m[0m  [2mchecks              [0m 8.153388ms
+  [0m[0m  [2mtotal               [0m 8.659832ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -286,7 +286,7 @@ _Generated 2026-09-04T10:34:37Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m[3mResult #2[0m [0m[97mLOW[39m[0m [1mSecurity group rule does not have a description.[0m [2m[0m
   [0m[0m[90m────────────────────────────────────────────────────────────────────────────────
-  [0m[0m  [3mmain.tf[3m[2m:19-24
+  [0m[0m  [3mmain.tf[2m[3m:19-24
   [0m[0m[90m────────────────────────────────────────────────────────────────────────────────[39m
   [0m[0m[90m   15  [0m[0m  [38;5;33mresource[0m [38;5;37m"aws_security_group"[0m [38;5;37m"final_project_dev"[0m {[0m
   [0m[90m   16  [0m[0m    [38;5;245mname[0m        = [38;5;37m"acs730-final-project-dev"[0m
@@ -312,11 +312,11 @@ _Generated 2026-09-04T10:34:37Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 15.158µs
-  [0m[0m  [2mparsing             [0m 159.709µs
-  [0m[0m  [2madaptation          [0m 79.559µs
-  [0m[0m  [2mchecks              [0m 5.611438ms
-  [0m[0m  [2mtotal               [0m 5.865864ms
+  [0m[0m  [2mdisk i/o            [0m 13.806µs
+  [0m[0m  [2mparsing             [0m 156.702µs
+  [0m[0m  [2madaptation          [0m 95.799µs
+  [0m[0m  [2mchecks              [0m 3.051847ms
+  [0m[0m  [2mtotal               [0m 3.318154ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
