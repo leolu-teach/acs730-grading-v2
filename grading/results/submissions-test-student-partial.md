@@ -1,6 +1,6 @@
 # Test Results: submissions/test-student-partial
 
-_Generated 2026-09-05T09:56:54Z by run-tests.sh. This is a mechanical PASS/FAIL report, not a grade._
+_Generated 2026-09-06T10:15:08Z by run-tests.sh. This is a mechanical PASS/FAIL report, not a grade._
 
 ## lab1
 - ✅ **PASS** -- bash -n syntax check (lab1/scripts/create-security-group.sh)
@@ -83,11 +83,11 @@ _Generated 2026-09-05T09:56:54Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 15.299µs
-  [0m[0m  [2mparsing             [0m 208.079µs
-  [0m[0m  [2madaptation          [0m 89.717µs
-  [0m[0m  [2mchecks              [0m 3.165781ms
-  [0m[0m  [2mtotal               [0m 3.478876ms
+  [0m[0m  [2mdisk i/o            [0m 10.873µs
+  [0m[0m  [2mparsing             [0m 183.934µs
+  [0m[0m  [2madaptation          [0m 102.087µs
+  [0m[0m  [2mchecks              [0m 3.79256ms
+  [0m[0m  [2mtotal               [0m 4.089454ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -139,7 +139,7 @@ _Generated 2026-09-05T09:56:54Z by run-tests.sh. This is a mechanical PASS/FAIL 
   <details><summary>output</summary>
 
   ```
-  [0m[31m   27  [0m[0m[31m[[39m[0m[0m [0m  [38;5;245mrestrict_public_buckets[0m = [38;5;166mfalse[0m[0m [3m[2m[3m(false)[0m
+  [0m[31m   27  [0m[0m[31m[[39m[0m[0m [0m  [38;5;245mrestrict_public_buckets[0m = [38;5;166mfalse[0m[0m [3m[3m[2m(false)[0m
   [0m[90m   28  [0m[0m  [0m}[0m
   [0m[90m────────────────────────────────────────────────────────────────────────────────[39m
   [0m[0m  [2m        ID[0m[3m aws-s3-no-public-buckets
@@ -154,11 +154,11 @@ _Generated 2026-09-05T09:56:54Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 17.272µs
-  [0m[0m  [2mparsing             [0m 226.161µs
-  [0m[0m  [2madaptation          [0m 99.285µs
-  [0m[0m  [2mchecks              [0m 3.045524ms
-  [0m[0m  [2mtotal               [0m 3.388242ms
+  [0m[0m  [2mdisk i/o            [0m 10.965µs
+  [0m[0m  [2mparsing             [0m 201.157µs
+  [0m[0m  [2madaptation          [0m 90.061µs
+  [0m[0m  [2mchecks              [0m 4.05911ms
+  [0m[0m  [2mtotal               [0m 4.361293ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -234,11 +234,11 @@ _Generated 2026-09-05T09:56:54Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 13.285µs
-  [0m[0m  [2mparsing             [0m 335.024µs
-  [0m[0m  [2madaptation          [0m 158.135µs
-  [0m[0m  [2mchecks              [0m 8.153388ms
-  [0m[0m  [2mtotal               [0m 8.659832ms
+  [0m[0m  [2mdisk i/o            [0m 10.015µs
+  [0m[0m  [2mparsing             [0m 143.33µs
+  [0m[0m  [2madaptation          [0m 82.747µs
+  [0m[0m  [2mchecks              [0m 2.068635ms
+  [0m[0m  [2mtotal               [0m 2.304727ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -312,11 +312,11 @@ _Generated 2026-09-05T09:56:54Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 13.806µs
-  [0m[0m  [2mparsing             [0m 156.702µs
-  [0m[0m  [2madaptation          [0m 95.799µs
-  [0m[0m  [2mchecks              [0m 3.051847ms
-  [0m[0m  [2mtotal               [0m 3.318154ms
+  [0m[0m  [2mdisk i/o            [0m 9.417µs
+  [0m[0m  [2mparsing             [0m 130.876µs
+  [0m[0m  [2madaptation          [0m 81.561µs
+  [0m[0m  [2mchecks              [0m 4.952214ms
+  [0m[0m  [2mtotal               [0m 5.174068ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
