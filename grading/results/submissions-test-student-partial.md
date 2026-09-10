@@ -1,6 +1,6 @@
 # Test Results: submissions/test-student-partial
 
-_Generated 2026-09-09T10:45:22Z by run-tests.sh. This is a mechanical PASS/FAIL report, not a grade._
+_Generated 2026-09-10T10:35:39Z by run-tests.sh. This is a mechanical PASS/FAIL report, not a grade._
 
 ## lab1
 - ✅ **PASS** -- bash -n syntax check (lab1/scripts/create-security-group.sh)
@@ -57,7 +57,7 @@ _Generated 2026-09-09T10:45:22Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m[3mResult #4[0m [0m[97mLOW[39m[0m [1mSecurity group rule does not have a description.[0m [2m[0m
   [0m[0m[90m────────────────────────────────────────────────────────────────────────────────
-  [0m[0m  [3mmain.tf[3m[2m:19-24
+  [0m[0m  [3mmain.tf[2m[3m:19-24
   [0m[0m[90m────────────────────────────────────────────────────────────────────────────────[39m
   [0m[0m[90m   15  [0m[0m  [38;5;33mresource[0m [38;5;37m"aws_security_group"[0m [38;5;37m"lab3_demo"[0m {[0m
   [0m[90m   16  [0m[0m    [38;5;245mname[0m        = [38;5;37m"acs730-lab3-demo"[0m
@@ -83,11 +83,11 @@ _Generated 2026-09-09T10:45:22Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 13.706µs
-  [0m[0m  [2mparsing             [0m 217.367µs
-  [0m[0m  [2madaptation          [0m 92.032µs
-  [0m[0m  [2mchecks              [0m 3.430565ms
-  [0m[0m  [2mtotal               [0m 3.75367ms
+  [0m[0m  [2mdisk i/o            [0m 15.849µs
+  [0m[0m  [2mparsing             [0m 213.34µs
+  [0m[0m  [2madaptation          [0m 84.138µs
+  [0m[0m  [2mchecks              [0m 9.816803ms
+  [0m[0m  [2mtotal               [0m 10.13013ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -139,7 +139,7 @@ _Generated 2026-09-09T10:45:22Z by run-tests.sh. This is a mechanical PASS/FAIL 
   <details><summary>output</summary>
 
   ```
-  [0m[31m   27  [0m[0m[31m[[39m[0m[0m [0m  [38;5;245mrestrict_public_buckets[0m = [38;5;166mfalse[0m[0m [3m[2m[3m(false)[0m
+  [0m[31m   27  [0m[0m[31m[[39m[0m[0m [0m  [38;5;245mrestrict_public_buckets[0m = [38;5;166mfalse[0m[0m [3m[3m[2m(false)[0m
   [0m[90m   28  [0m[0m  [0m}[0m
   [0m[90m────────────────────────────────────────────────────────────────────────────────[39m
   [0m[0m  [2m        ID[0m[3m aws-s3-no-public-buckets
@@ -154,11 +154,11 @@ _Generated 2026-09-09T10:45:22Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 15.529µs
-  [0m[0m  [2mparsing             [0m 286.385µs
-  [0m[0m  [2madaptation          [0m 110.627µs
-  [0m[0m  [2mchecks              [0m 9.884854ms
-  [0m[0m  [2mtotal               [0m 10.297395ms
+  [0m[0m  [2mdisk i/o            [0m 13.766µs
+  [0m[0m  [2mparsing             [0m 270.726µs
+  [0m[0m  [2madaptation          [0m 83.516µs
+  [0m[0m  [2mchecks              [0m 6.738362ms
+  [0m[0m  [2mtotal               [0m 7.10637ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -234,11 +234,11 @@ _Generated 2026-09-09T10:45:22Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 19.496µs
-  [0m[0m  [2mparsing             [0m 413.846µs
-  [0m[0m  [2madaptation          [0m 117.87µs
-  [0m[0m  [2mchecks              [0m 8.008492ms
-  [0m[0m  [2mtotal               [0m 8.559704ms
+  [0m[0m  [2mdisk i/o            [0m 13.345µs
+  [0m[0m  [2mparsing             [0m 142.427µs
+  [0m[0m  [2madaptation          [0m 78.516µs
+  [0m[0m  [2mchecks              [0m 3.135236ms
+  [0m[0m  [2mtotal               [0m 3.369524ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
@@ -312,11 +312,11 @@ _Generated 2026-09-09T10:45:22Z by run-tests.sh. This is a mechanical PASS/FAIL 
   
   [0m[0m  [1mtimings[0m
     ──────────────────────────────────────────
-  [0m[0m  [2mdisk i/o            [0m 14.658µs
-  [0m[0m  [2mparsing             [0m 148.218µs
-  [0m[0m  [2madaptation          [0m 79.529µs
-  [0m[0m  [2mchecks              [0m 8.695191ms
-  [0m[0m  [2mtotal               [0m 8.937596ms
+  [0m[0m  [2mdisk i/o            [0m 13.255µs
+  [0m[0m  [2mparsing             [0m 144.88µs
+  [0m[0m  [2madaptation          [0m 77.234µs
+  [0m[0m  [2mchecks              [0m 3.121623ms
+  [0m[0m  [2mtotal               [0m 3.356992ms
   [0m
   [0m  [1mcounts[0m
     ──────────────────────────────────────────
